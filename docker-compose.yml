@@ -13,8 +13,8 @@ services:
       - proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /TTraefik./traefik.toml:/TTraefik/traefik.toml
-      - /TTraefik/acme.json:/TTraefik/acme.json
+      - /TTraefik/traefik.toml:/etc/traefik/traefik.toml
+      - /TTraefik/acme.json:/etc/traefik/acme.json
     labels:
       - "traefik.frontend.rule=Host:dns2.axmelluzzo.com"
       - "traefik.port=8080"
