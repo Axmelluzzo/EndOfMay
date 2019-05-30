@@ -1,0 +1,37 @@
+debug = false
+checkNewVersion = true
+InsecureSkipVerify = true
+logLevel = "ERROR"
+
+defaultEntryPoints = ["https","http"]
+
+[web]
+  address = ":8080"
+  [web.auth.basic]
+  users = ["axmelluzzo:$apr1$7JUaaAOw$FcVxSr0kegqwlB9tU7rR6."]
+
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "axmelluzzo.com"
+watch = true
+exposedbydefault = false
+
+[acme]
+email = "axmelluzzo@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
