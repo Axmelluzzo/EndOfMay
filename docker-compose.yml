@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  traefik:
+    image: traefik:latest
+    command: --docker --docker.domain=axmelluzzo.com
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    networks:
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /TTraefik./traefik.toml:/TTraefik/traefik.toml
+      - /TTraefik/acme.json:/TTraefik/acme.json
+    labels:
+      - "traefik.frontend.rule=Host:dns2.axmelluzzo.com"
+      - "traefik.port=8080"
+    container_name: TTraefik
+    restart: always
+
+networks:
+  proxy:
+    external: true
